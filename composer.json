@@ -1,0 +1,42 @@
+{
+  "name": "lingxiang/laravel-elasticsearch",
+  "description": "Use SQL statements to query elasticsearch",
+  "keywords": [
+    "elasticsearch",
+    "laravel",
+    "sql",
+    "orm",
+    "php"
+  ],
+  "homepage": "https://github.com/Ethennoob/laravel-elasticsearch",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "lingxiang",
+      "email": "lingxiang@han-zi.cn"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "illuminate/support": "^5.3|^6.0",
+    "elasticsearch/elasticsearch": "~7.0",
+    "babenkoivan/scout-elasticsearch-driver": "^4.0"
+  },
+  "autoload": {
+    "files": [
+    ],
+    "psr-4": {
+      "Lingxiang\\ElasticSearch\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Lingxiang\\ElasticSearch\\LaravelServiceProvider"
+      ],
+      "aliases": {
+        "Elasticsearch": "Lingxiang\\Elasticsearch\\LaravelServiceFacade"
+      }
+    }
+  }
+}

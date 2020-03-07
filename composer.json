@@ -26,7 +26,7 @@
     "files": [
     ],
     "psr-4": {
-      "Lingxiang\\ElasticSearch\\": "src/"
+      "Lingxiang\\Elasticsearch\\": "src/"
     }
   },
   "extra": {

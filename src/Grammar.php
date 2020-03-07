@@ -65,7 +65,7 @@ class Grammar
         $index = array_pull($body, 'index');
         $type = array_pull($body, 'type');
         $scroll = array_pull($body, 'scroll');
-        $params = ['body' => $body, 'index' => $index, 'type' => $type];
+        $params = ['body' => $body, 'index' => $index, 'type' => $type, 'track_total_hits' => true];
         if ($scroll) {
             $params['scroll'] = $scroll;
         }

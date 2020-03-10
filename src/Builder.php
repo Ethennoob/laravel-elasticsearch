@@ -8,6 +8,9 @@ use Elasticsearch\ClientBuilder;
 use Illuminate\Support\Collection;
 use RuntimeException;
 use stdClass;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Processor\IntrospectionProcessor;
 
 /**
  * Class Builder.
@@ -147,9 +150,9 @@ class Builder
             ->setHosts($this->config['hosts']);
 
         if ($this->config['open_log']) {
-            $clientBuilder->setLogger(
-                ClientBuilder::defaultLogger($this->config['log_path'])
-            );
+            $logger = new \Monolog\Logger('Elasticsearch');
+            $logger->pushHandler(new \Monolog\Handler\StreamHandler($this->config['log_path'], \Monolog\Logger::WARNING));
+            $clientBuilder->setLogger($logger);
         }
 
         return $clientBuilder->build();
@@ -817,6 +820,7 @@ class Builder
      */
     protected function metaData(array $results): Collection
     {
+        $this->wheres = [];
         return collect($results['hits']['hits'])->map(function ($hit) {
             return $this->sourceToObject($hit);
         });

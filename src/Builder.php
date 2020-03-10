@@ -810,6 +810,8 @@ class Builder
             $this->queryLogs[] = $params;
         }
 
+        $this->wheres = [];
+
         return call_user_func([$this->elastisearch, $method], $params);
     }
 
@@ -820,7 +822,6 @@ class Builder
      */
     protected function metaData(array $results): Collection
     {
-        $this->wheres = [];
         return collect($results['hits']['hits'])->map(function ($hit) {
             return $this->sourceToObject($hit);
         });

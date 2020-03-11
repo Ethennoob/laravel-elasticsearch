@@ -705,6 +705,25 @@ class Builder
     }
 
     /**
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function bulk(array $data): stdClass
+    {
+        $result = $this->runQuery(
+            $this->grammar->compileBulk($this, $data),
+            'bulk'
+        );
+
+        if (!isset($result['errors']) || $result['errors'] !== false) {
+            throw new RunTimeException('Create params: ' . json_encode($this->getLastQueryLog()));
+        }
+
+        return (object) $data;
+    }
+
+    /**
      * @return int
      */
     public function count(): int

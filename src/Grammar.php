@@ -216,6 +216,29 @@ class Grammar
     }
 
     /**
+     * @param Builder $builder
+     * @param array $data
+     *
+     * @return array
+     */
+    public function compileBulk(Builder $builder, array &$data): array
+    {
+        $list = [];
+
+        $index = $this->compileComponents($builder);
+
+        foreach ($data as $key => $value) {
+            $list[]['index'] = [
+                '_index' => $index['index'],
+                '_type' => $index['type']
+            ];
+            $list[] = $value;
+        }
+
+        return ['body' => $list];
+    }
+
+    /**
      * @param string      $leaf
      * @param string      $column
      * @param string|null $operator
